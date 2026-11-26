@@ -18,6 +18,7 @@ docker compose up --build -d
 - 验包评分 `inspection_score`
 - 复核配额 `desk_quota`
 - 退货复盘 `return_replay`
+- 复核工作台 `review_desk`（有状态补扫重派：开验锁位、同版矛盾撤回、末位空位人工优先、乱序修订与批次幂等）
 
 ## 查看运行结果
 

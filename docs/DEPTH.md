@@ -12,6 +12,7 @@
 | M4 | 验包评分 | RiskVector处理证据 | `src/returnscope/inspection_score/contracts.py` `src/returnscope/inspection_score/algorithm.py` `src/returnscope/inspection_score/service.py` `src/returnscope/inspection_score/rolling_validation.py` | `tests/test_inspection_score.py` `tests/test_rolling_validation.py` |
 | M5 | 复核配额 | ReviewCandidate处理证据 | `src/returnscope/desk_quota/contracts.py` `src/returnscope/desk_quota/algorithm.py` `src/returnscope/desk_quota/service.py` `src/returnscope/desk_quota/staffing_frontier.py` | `tests/test_desk_quota.py` `tests/test_staffing_frontier.py` |
 | M6 | 退货复盘 | RefundEvidence处理证据 | `src/returnscope/return_replay/contracts.py` `src/returnscope/return_replay/algorithm.py` `src/returnscope/return_replay/service.py` `src/returnscope/return_replay/store_risk_ledger.py` | `tests/test_return_replay.py` `tests/test_store_risk_ledger.py` |
+| M7 | 复核工作台 | ReviewDesk补扫重派证据 | `src/returnscope/review_desk/contracts.py` `src/returnscope/review_desk/algorithm.py` `src/returnscope/review_desk/service.py` | `tests/test_review_desk.py` `tests/test_review_desk_service.py` |
 
 ## 边界登记
 
@@ -28,3 +29,6 @@
 | TRAP-44 | 异常包裹超出历史特征轮廓时转验包 | `src/returnscope/inspection_score/algorithm.py` | `tests/test_inspection_score.py::test_unfamiliar_weight_profile_does_not_auto_release` |
 | TRAP-53 | 异常包裹与正常包裹拼批不影响正常样本概率 | `src/returnscope/inspection_score/algorithm.py` | `tests/test_inspection_score.py::test_batch_composition_cannot_change_score` |
 | TRAP-54 | 变更训练轮次使拟合指纹失效 | `src/returnscope/inspection_score/algorithm.py` | `tests/test_inspection_score.py::test_history_and_hyperparameters_change_version` |
+| TRAP-61 | 补扫重派不得移动已开验包裹的复核位，同版矛盾时例外并连坐撤回 | `src/returnscope/review_desk/algorithm.py` | `tests/test_review_desk.py::test_opened_parcel_keeps_slot_and_position_through_redispatch` `tests/test_review_desk.py::test_same_version_conflict_withdraws_even_opened_parcel_and_refills_slot` |
+| TRAP-62 | 重派只剩一个空位时范围外人工件优先于高分件，但仍受原门店上限约束 | `src/returnscope/review_desk/algorithm.py` | `tests/test_review_desk.py::test_last_open_slot_prefers_out_of_scope_over_high_scorer` `tests/test_review_desk.py::test_last_slot_rule_still_respects_shop_cap` |
+| TRAP-63 | 乱序补扫旧修订号不得覆盖新称重，重跑同批补扫不重复占位 | `src/returnscope/review_desk/algorithm.py` | `tests/test_review_desk.py::test_out_of_order_older_revision_never_overwrites_new_weight` `tests/test_review_desk.py::test_rerun_same_batch_does_not_change_slots_or_weight` |
